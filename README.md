@@ -1,0 +1,1 @@
+# Different-Types-of-Responses-in-a-Single-DOF-vibration-system
