@@ -13,7 +13,7 @@ def forced(n_val = 1):
         except Exception:
             print("Wrong input type, Enter a integer value")
             gar_val = 0
-            force = int(input());
+            force = input();
     if force == 1:
         print("HARMONICALLY FORCED")
     elif force == 0:
@@ -37,7 +37,7 @@ def amt_force(n_val1 = 1):
     while not(gar_val1):
         # Using try and except for Wrong input
         try:
-            am_force = int(am_force);
+            am_force = float(am_force);
             gar_val1 = 1
             if am_force == 0:
                 raise Exception
@@ -58,7 +58,7 @@ def freq_in(n_val2 = 1):
     while not(gar_val1):
         # Using try and except for Wrong input
         try:
-            freq = int(freq);
+            freq = float(freq);
             gar_val1 = 1
         except Exception:
             print("Wrong input type, Enter a integer value")

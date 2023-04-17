@@ -6,6 +6,7 @@ from time_for_run import *
 from calculations import *
 
 #Taking mass and stiffness from the user
+print("Enter Every Value in SI units")
 mass,stiffness = mass_stiffness_in();
 
 # Asking user about if vibration is damped or not and then asking for damping coefficient

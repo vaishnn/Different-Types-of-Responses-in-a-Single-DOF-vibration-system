@@ -28,6 +28,9 @@ def calculate(mass, stiffness, from_time, to_time, init_pos, init_vel, damping_c
                 C2 = (-init_pos * omega_natural *(zeta - np.sqrt(zeta**2 - 1)) - init_vel)/(2*omega_natural*np.sqrt(zeta**2 - 1))
                 position_arr = C1*np.exp((-zeta + np.sqrt(zeta**2 - 1))*omega_natural*time) + C2*np.exp((-zeta - np.sqrt(zeta**2 - 1))*omega_natural*time)
     else:
+        if stiffness - mass * frequency_of_force**2 == 0:
+            print("Condition of Resonance");
+            return
         if damping_coefficient == 0:
             # Undamped under Harmonic Force
             position_arr = ((init_pos - amount_of_force/(stiffness - mass * frequency_of_force**2))*np.cos(omega_natural*time) + (init_vel/omega_natural)*np.sin(omega_natural*time) + 
