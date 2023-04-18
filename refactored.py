@@ -2,6 +2,21 @@ import questionary
 import sys
 from calculations import calculate, plot_graph
 
+def get_float_input_with_check(prompt, condition):
+    # function to get input and convert it to float
+    while True:
+        try:
+            user_input = questionary.text(prompt).ask()
+            float_input = float(user_input)
+            if condition(float_input):
+                return float_input
+            else:
+                raise ValueError
+        except ValueError:
+            print("Please enter valid value for the float number.")
+        except:
+            sys.exit(1)
+
 def get_float_input(prompt):
     # function to get input and convert it to float
     while True:
@@ -54,18 +69,18 @@ def external_force():
         elif user_choice[0] == '2':
             forced_flag = 1
             harmonic_force["amplitude"] = get_float_input("Enter the amplitude of harmonic force:")
-            harmonic_force["frequency"] = get_float_input("Enter the frequency of harmonic force:")
+            harmonic_force["frequency"] = get_float_input_with_check("Enter the frequency of harmonic force:", lambda inp: inp > 0)
     return forced_flag, harmonic_force
 
 if __name__ == "__main__":
     motd()
 
-    mass = get_float_input("Enter the mass of the body (m) :")
-    stiffness = get_float_input("Enter the stiffnes of the spring (k) :")
-    damping_coeff = get_float_input("Enter damping coefficient (C) [Enter 0 if undamped]:")
+    mass = get_float_input_with_check("Enter the mass of the body (m) :", lambda inp: inp > 0)
+    stiffness = get_float_input_with_check("Enter the stiffnes of the spring (k) :", lambda inp: inp > 0)
+    damping_coeff = get_float_input_with_check("Enter damping coefficient (C) [Enter 0 if undamped]:", lambda inp: inp >= 0)
     forced_flag, harmonic_force = external_force()
-    init_time = get_float_input("Enter initial time at which the simulation is started:")
-    time = get_float_input("Enter amount of time for which to run the simulation:")
+    init_time = get_float_input_with_check("Enter initial time at which the simulation is started:", lambda inp: inp > 0)
+    time = get_float_input_with_check("Enter amount of time for which to run the simulation:", lambda inp: inp > 0)
     init_position = get_float_input("Enter initial position of vibrating mass:")
     init_velocity = get_float_input("Enter initial velocity of vibrating mass:")
 
