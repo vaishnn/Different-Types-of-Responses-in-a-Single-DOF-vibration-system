@@ -3,7 +3,7 @@ import sys
 from calculations import calculate, plot_graph
 
 def get_float_input_with_check(prompt, condition):
-    # function to get input and convert it to float
+    # function to get input and convert it to float with check
     while True:
         try:
             user_input = questionary.text(prompt).ask()
@@ -79,10 +79,11 @@ if __name__ == "__main__":
     stiffness = get_float_input_with_check("Enter the stiffnes of the spring (k) :", lambda inp: inp > 0)
     damping_coeff = get_float_input_with_check("Enter damping coefficient (C) [Enter 0 if undamped]:", lambda inp: inp >= 0)
     forced_flag, harmonic_force = external_force()
-    init_time = get_float_input_with_check("Enter initial time at which the simulation is started:", lambda inp: inp > 0)
+    print("Enter conditions at t=0")
+    init_position = get_float_input("Enter position of vibrating mass at t=0:")
+    init_velocity = get_float_input("Enter velocity of vibrating mass at t=0:")
+    init_time = get_float_input_with_check("Enter time at which the simulation is started:", lambda inp: inp > 0)
     time = get_float_input_with_check("Enter amount of time for which to run the simulation:", lambda inp: inp > 0)
-    init_position = get_float_input("Enter initial position of vibrating mass:")
-    init_velocity = get_float_input("Enter initial velocity of vibrating mass:")
 
     # doing the calculations:
     calculate(mass, stiffness, from_time=init_time, to_time=(init_time+time), init_pos=init_position, init_vel=init_velocity, damping_coefficient=damping_coeff, amount_of_force=harmonic_force["amplitude"], frequency_of_force=harmonic_force["frequency"])

@@ -1,8 +1,14 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from PIL import Image
+# from PIL import Image
 import os
 def calculate(mass, stiffness, from_time, to_time, init_pos, init_vel, damping_coefficient, amount_of_force, frequency_of_force):
+    note= """
+    Important to Note:
+        - the variables `init_pos` and `init_vel`  represent the conditions at t=0 and not at `from_time`
+        - the variables `from_time` and `to_time` only represent the time to be plotted on graph
+    """
+    print(note)
     
     # Creating an numpy array
     time = np.arange(from_time,to_time,0.01);
@@ -10,7 +16,6 @@ def calculate(mass, stiffness, from_time, to_time, init_pos, init_vel, damping_c
     pos_arr_force = 0
     if amount_of_force == 0:
         if damping_coefficient == 0:
-            # Undamped, free vibration
             position_arr = init_pos*np.cos(omega_natural*time) + init_vel/omega_natural*np.sin(omega_natural*time);
         else:
             # Damped, free vibration
@@ -52,5 +57,6 @@ def plot_graph(position_matrix,time_matrix):
     plt.grid(True)
     plt.legend()
     plt.savefig("Vibration Plot")
-    im = Image.open("Vibration Plot.png")
-    im.show()
+    plt.show()
+    # im = Image.open("Vibration Plot.png")
+    # im.show()
