@@ -42,10 +42,17 @@ def calculate(mass, stiffness, from_time, to_time, init_pos, init_vel, damping_c
                             (amount_of_force/(stiffness - mass * frequency_of_force**2)*np.cos(frequency_of_force*time)))
             pos_arr_force = (amount_of_force/(stiffness - mass * frequency_of_force**2)*np.cos(frequency_of_force*time))
         else:
+            # Damped with Harmonic Force
             zeta = damping_coefficient/(2*mass*omega_natural)
+            wd = omega_natural * np.sqrt(1 - zeta*omega_natural**2)  # Damped frequency
+    
+            A = amount_of_force / (mass * np.sqrt((omega_natural**2 - frequency_of_force**2)**2 + (2*zeta*omega_natural*frequency_of_force)**2))  # Amplitude of the steady-state response
+            phi = np.arctan2(2*zeta*omega_natural*frequency_of_force, omega_natural**2 - frequency_of_force**2)  # Phase angle of the steady-state response
+    
+            position_arr = A * np.exp(-zeta*omega_natural*omega_natural*time) * np.sin(wd*time + phi) + (amount_of_force/(stiffness-mass*frequency_of_force**2))*np.sin(frequency_of_force*time) + init_pos*np.cos(omega_natural*time) + (zeta*omega_natural*init_pos + init_vel/omega_natural)*np.sin(omega_natural*time)  # Position equation
             # Damped under Harmonic Force
-            position_arr = (amount_of_force/stiffness)/np.sqrt((1-(frequency_of_force/omega_natural)**2)**2 + (2*zeta*frequency_of_force/omega_natural)**2)*np.sin(frequency_of_force*time-
-                            np.arctan(2*zeta*frequency_of_force/omega_natural/(1-(frequency_of_force/omega_natural)**2)))
+            # position_arr = (amount_of_force/stiffness)/np.sqrt((1-(frequency_of_force/omega_natural)**2)**2 + (2*zeta*frequency_of_force/omega_natural)**2)*np.sin(frequency_of_force*time-
+            #                 np.arctan(2*zeta*frequency_of_force/omega_natural/(1-(frequency_of_force/omega_natural)**2)))
     plot_graph(position_arr,time)
 
 
