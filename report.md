@@ -1,11 +1,4 @@
 # Vibration Analyzer
-## Group Members
-- 2020UME1838 - Rohit Kaushal
-- 2020UME1839 - Divyansh Rawat
-- 2020UME1840 - Vaishnav Pratap
-- 2020UME1841 - Kunal Sharma
-- 2020UME1843 - Harsh Maniyar
-
 ## main.py
 ```python
 from vib_type import *
