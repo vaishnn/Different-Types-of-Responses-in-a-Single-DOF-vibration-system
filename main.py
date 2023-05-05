@@ -26,10 +26,11 @@ else:
     frequency_of_force = 0;
 
 # Asking user to enter Intital Conditions
-print("Enter intitial Conditions\n")
+print("Enter Conditions at t=0\n")
 init_pos, init_vel = initial_conditions();
 
 # Asking user to enter time constraints
+print("Enter the time which needs to be plotted")
 from_time, total_time = time_to_run()
 to_time = total_time + from_time;
 

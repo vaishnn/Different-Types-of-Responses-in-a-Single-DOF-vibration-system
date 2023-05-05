@@ -1,5 +1,5 @@
 def time_to_run():
-    print("Enter the Intial time for starting the simulation")
+    print("Enter the time at which the simulation should be started:")
     while True:
         try:
             init_time = float(input())
